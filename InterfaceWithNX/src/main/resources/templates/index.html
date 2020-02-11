@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<title>接口列表</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="/css/main.css" th:href="@{/css/main.css}" />
+</head>
+<body>
+	
+	<div class="center">
+		<h1>接口列表</h1>
+		<div>
+		<div th:fragment="logout" sec:authorize="isAuthenticated()">
+			当前登录用户: <span sec:authentication="name"></span> | 当前登录用户角色: <span
+				sec:authentication="principal.authorities"></span>
+			<div>
+	              <form action="#" th:action="@{/logout}" method="post">
+	                  <input type="submit" value="登出" />
+	              </form>
+			</div>
+		</div>
+	</div>
+		<ul>
+	        <form th:action="@{/interface/create}" method="post">
+	        	<label for="cpx">产品线</label>: 
+				<input type="text" id="cpx" name="cpx" autofocus="autofocus" /> <br />
+				<label for="cpxh">产品型号</label>: 
+				<input type="text" id="cpxh" name="cpxh" autofocus="autofocus" /> <br />
+				<label for="cpbm">产品编码</label>: 
+				<input type="text" id="cpbm" name="cpbm" autofocus="autofocus" /> <br />
+				<label for="pl">品类</label>: 
+				<input type="text" id="pl" name="pl" autofocus="autofocus" /> <br />
+				<label for="weight_0">毛重</label>: 
+				<input type="text" id="weight_0" name="weight_0" autofocus="autofocus" /> <br />
+				<label for="weight_1">净重</label>: 
+				<input type="text" id="weight_1" name="weight_1" autofocus="autofocus" /> <br />
+				<label for="width">冰箱宽度</label>: 
+				<input type="text" id="width" name="width" autofocus="autofocus" /> <br />
+				<label for="length">冰箱深度(不包含后背凸起)</label>: 
+				<input type="text" id="length" name="length" autofocus="autofocus" /> <br />
+				<label for="tq">后背凸起</label>: 
+				<input type="text" id="tq" name="tq" autofocus="autofocus" /> <br />
+				<label for="width_x">U壳宽度</label>: 
+				<input type="text" id="width_x" name="width_x" autofocus="autofocus" /> <br />
+				<label for="high_x">U壳深度</label>: 
+				<input type="text" id="high_x" name="high_x" autofocus="autofocus" /> <br />
+				<label for="width_0">压机底板宽度</label>: 
+				<input type="text" id="width_0" name="width_0" autofocus="autofocus" /> <br />
+				<label for="f0">压机底板侧面受力F0</label>: 
+				<input type="text" id="f0" name="f0" autofocus="autofocus" /> <br />
+				<label for="weight_2">门体重量</label>: 
+				<input type="text" id="weight_2" name="weight_2" autofocus="autofocus" /> <br />
+				<label for="length_1">门体宽度</label>: 
+				<input type="text" id="length_1" name="length_1" autofocus="autofocus" /> <br />
+				<label for="width_1">门体厚度</label>: 
+				<input type="text" id="width_1" name="width_1" autofocus="autofocus" /> <br />
+				<label for="door_h">门体距冰箱底面距离</label>: 
+				<input type="text" id="door_h" name="door_h" autofocus="autofocus" /> <br />
+				<label for="gl">滚轮中心U壳距离</label>: 
+				<input type="text" id="gl" name="gl" autofocus="autofocus" /> <br />
+				<label for="y_50">滚轮边距压机支撑板距离</label>: 
+				<input type="text" id="y_50" name="y_50" autofocus="autofocus" /> <br />
+				<label for="mtuk">门体距I壳距离</label>: 
+				<input type="text" id="mtuk" name="mtuk" autofocus="autofocus" /> <br />
+				<label for="b_y">压机支撑板压型深度</label>: 
+				<input type="text" id="b_y" name="b_y" autofocus="autofocus" /> <br />
+				<label for="yjsd">压机支撑板距U壳深度(小平台)</label>: 
+				<input type="text" id="yjsd" name="yjsd" autofocus="autofocus" /> <br />
+				<label for="gl1_gl5">滚轮处间距</label>: 
+				<input type="text" id="gl1_gl5" name="gl1_gl5" autofocus="autofocus" /> <br />
+				<label for="ukjlh">U壳距铰链深度</label>: 
+				<input type="text" id="ukjlh" name="ukjlh" autofocus="autofocus" /> <br />
+				<label for="dbsfytq">底钢是否有凸起</label>: 
+				<input type="text" id="dbsfytq" name="dbsfytq" autofocus="autofocus" /> <br />
+				<label for="dguk">低钢距U壳距离</label>: 
+				<input type="text" id="dguk" name="dguk" autofocus="autofocus" /> <br />
+				<label for="dgtq">底钢凸起高度</label>: 
+				<input type="text" id="dgtq" name="dgtq" autofocus="autofocus" /> <br />
+				<input type="submit" value="调用NX接口1" />
+			</form>
+	    </ul>
+    </div>
+</body>
+</html>

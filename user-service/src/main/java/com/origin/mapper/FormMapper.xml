@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.origin.mapper.FormMapper" >
+    <resultMap id="FormMap" type="com.origin.ben.Form">
+        <result column="weight_0" property="weight_0" jdbcType="VARCHAR" />
+        <result column="weight_1" property="weight_1" jdbcType="VARCHAR" />
+        <result column="width" property="width" jdbcType="VARCHAR" />
+        <result column="length" property="length" jdbcType="VARCHAR" />
+        <result column="tq" property="tq" jdbcType="VARCHAR" />
+        <result column="width_x" property="width_x" jdbcType="VARCHAR" />
+        <result column="high_x" property="high_x" jdbcType="VARCHAR" />
+        <result column="width_0" property="width_0" jdbcType="VARCHAR" />
+        <result column="f0" property="f0" jdbcType="VARCHAR" />
+        <result column="weight_2" property="weight_2" jdbcType="VARCHAR" />
+        <result column="length_1" property="length_1" jdbcType="VARCHAR" />
+        <result column="width_1" property="width_1" jdbcType="VARCHAR" />
+        <result column="door_h" property="door_h" jdbcType="VARCHAR" />
+        <result column="gl" property="gl" jdbcType="VARCHAR" />
+        <result column="y_50" property="y_50" jdbcType="VARCHAR" />
+        <result column="mtuk" property="mtuk" jdbcType="VARCHAR" />
+        <result column="b_y" property="b_y" jdbcType="VARCHAR" />
+        <result column="yjsd" property="yjsd" jdbcType="VARCHAR" />
+        <result column="gl5" property="gl5" jdbcType="VARCHAR" />
+        <result column="ukjlh" property="ukjlh" jdbcType="VARCHAR" />
+        <result column="dguk" property="dguk" jdbcType="VARCHAR" />
+        <result column="dgtq" property="dgtq" jdbcType="VARCHAR" />
+        <result column="path" property="path" jdbcType="VARCHAR" />
+        <result column="userName" property="userName" jdbcType="VARCHAR" />
+        <result column="createDate" property="createDate" jdbcType="VARCHAR" />
+        <result column="id" property="id" jdbcType="VARCHAR" />
+        <result column="cpx" property="cpx" jdbcType="VARCHAR" />
+        <result column="cpxh" property="cpxh" jdbcType="VARCHAR" />
+        <result column="cpbm" property="cpbm" jdbcType="VARCHAR" />
+        <result column="pl" property="pl" jdbcType="VARCHAR" />
+        <result column="dbsfytq" property="dbsfytq" jdbcType="VARCHAR" />
+    </resultMap>
+     
+    <insert id="insertForm" >
+       INSERT INTO
+            form
+            (weight_0,
+			weight_1,
+			width,
+			length,
+			tq,
+			width_x,
+			high_x,
+			width_0,
+			f0,
+			weight_2,
+			length_1,
+			width_1,
+			door_h,
+			gl,
+			y_50,
+			mtuk,
+			b_y,
+			yjsd,
+			gl5,
+			ukjlh,
+			dguk,
+			dgtq,
+			path,
+			userName,
+			createDate,
+			id,
+			cpx,
+			cpxh,
+			cpbm,
+			pl,
+			dbsfytq)
+        VALUES
+            (#{weight_0},
+			#{weight_1},
+			#{width},
+			#{length},
+			#{tq},
+			#{width_x},
+			#{high_x},
+			#{width_0},
+			#{f0},
+			#{weight_2},
+			#{length_1},
+			#{width_1},
+			#{door_h},
+			#{gl},
+			#{y_50},
+			#{mtuk},
+			#{b_y},
+			#{yjsd},
+			#{gl5},
+			#{ukjlh},
+			#{dguk},
+			#{dgtq},
+			#{path},
+			#{userName},
+			#{createDate},
+			#{id},
+			#{cpx},
+			#{cpxh},
+			#{cpbm},
+			#{pl},
+			#{dbsfytq})
+    </insert>
+    
+	<select id="selectAll" resultMap="FormMap">
+		select * from form
+	</select>
+    
+    <select id="selectBigestForm" resultMap="FormMap">
+		select * from form where id = (select max(id) from form)
+	</select>
+ 
+</mapper>

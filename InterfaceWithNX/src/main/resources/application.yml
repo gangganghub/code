@@ -1,0 +1,22 @@
+server:
+  port: 8080
+
+spring:
+  thymeleaf:
+    mode: HTML5
+    encoding: UTF-8
+    cache: false
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/spring-cloud?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: 123456
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+mybatis:
+  mapper-locations: classpath:com/origin/mapper/*.xml

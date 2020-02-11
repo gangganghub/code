@@ -1,0 +1,28 @@
+body {
+	 background-image: url(../images/login.png);
+}
+* {
+	margin: 0;
+	padding: 0
+}
+
+html, body {
+	height: 100%
+}
+
+.outer-wrap {
+	height: 100%;
+	position: relative;
+	background-color: rgba(0, 0, 0, .5);
+}
+
+.login-panel {
+	width: 250px;
+	height: 80px;
+	background-color: orange;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-top: -150px;
+	margin-left: -200px;
+}

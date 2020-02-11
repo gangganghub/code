@@ -1,0 +1,27 @@
+server.port: 8080
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+spring:
+  application:
+    name: user-service
+
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/spring-cloud-auth?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: 123456
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+feign:
+  hystrix:
+   enabled: true
+   
+mybatis:
+  mapper-locations: classpath:com/origin/mapper/*.xml
