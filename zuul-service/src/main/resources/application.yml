@@ -3,7 +3,7 @@ eureka:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
 server:
-  port: 5000
+  port: 8080
 spring:
   application:
     name: zuul-service
@@ -13,3 +13,9 @@ zuul:
       path: /**
       service-id: user-service
       sensitive-headers:
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 60000
+ribbon:
+  ConnectTimeout: 60000
+  ReadTimeout: 60000
+  
+    

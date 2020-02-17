@@ -1,9 +1,12 @@
 package com.origin.web;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -16,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -40,7 +44,7 @@ public class WebController {
 
 	@Autowired
 	public FormService formService = null;
-
+	
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	public void form1(@RequestBody Form form, HttpServletResponse response) throws Exception {
@@ -54,10 +58,6 @@ public class WebController {
 		}
 		System.out.println("username:" + username);
 		String time = String.valueOf(new Date().getTime());
-		File file = new File("c:\\tmp\\" + time);
-		if (!file.exists()) {
-			file.mkdirs();
-		}
 		form.setPath("c:\\tmp\\" + time);
 		form.setUserName(username);
 		form.setCreateDate(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date()));
@@ -144,19 +144,43 @@ public class WebController {
 		if (form.getDgtq() != null && form.getDgtq().length() > 0) {
 			form.setDgtq("dgtq=" + form.getDgtq());
 		}
+		File file = new File("c:\\tmp\\" + time);
+		if (!file.exists()) {
+			file.mkdirs();
+		}
 		JSONObject json = JSONObject.fromObject(form);
 		System.out.println("json:" + json);
 		// 调用程序
-		try {
-			String cmd = "d:\\JSONTest.exe" + " \"" + json.toString().replaceAll("\"", "'") + "\"";
-			System.out.println("cmd:" + cmd);
-			Process process = Runtime.getRuntime().exec(cmd);
-		} catch (Exception e) {
-			throw new Exception("文件下载失败");
+		if(!new File("c:\\JSONTest.bat").exists()) {
+			file = new File("c:\\tmp\\test");
+		}else {
+			try {
+				String cmd = "c:\\JSONTest.bat" + " \"" + json.toString().replaceAll("\"", "'") + "\"";
+				System.out.println("cmd:" + cmd);
+				Process exec = Runtime.getRuntime().exec(cmd);
+				InputStream inputStream = exec.getInputStream();
+				BufferedReader red = new BufferedReader(new InputStreamReader(inputStream));
+				String line = "";
+				while((line = red.readLine())!=null) {
+					System.out.println(line);
+				}
+			} catch (Exception e) {
+				throw new Exception("文件下载失败");
+			}
 		}
+		/*for(int k = 0 ;k < 60; k++) {
+			Thread.sleep(5000);
+			if(file.listFiles()!=null && file.listFiles().length > 0) {
+				break;
+			}
+		}*/
+		//file = new File("c:\\tmp\\test");
+		
 		File[] files = file.listFiles();
 		if (files != null && files.length > 0) {
 			response.addHeader("Content-Disposition", "attachment;fileName=" + files[0].getName());
+			response.addHeader("filename", files[0].getName());
+			System.out.println("name:" + files[0].getName());
 			response.setContentType("application/force-download");// 设置强制下载不打开            
 			byte[] buffer = new byte[1024];
 			FileInputStream fis = null;
@@ -167,6 +191,7 @@ public class WebController {
 				OutputStream outputStream = response.getOutputStream();
 				int i = bis.read(buffer);
 				while (i != -1) {
+					System.out.println("-----------------");
 					outputStream.write(buffer, 0, i);
 					i = bis.read(buffer);
 				}
@@ -191,6 +216,7 @@ public class WebController {
 		} else {
 			throw new Exception("文件下载失败");
 		}
+		
 		// return "form1";
 	}
 
